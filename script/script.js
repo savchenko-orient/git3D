@@ -43,15 +43,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		btnMenu.addEventListener('click', handlerMenu);
 		menu.addEventListener('click', event => {
-			let target = event.target;
+			const target = event.target;
 			if (target.classList.contains('close-btn')) {
 				handlerMenu();
-			} else {
-				target = target.closest('li');
-				if (target) {
-					handlerMenu();
-				}
 			}
+			if (target.closest('li')) {
+				handlerMenu();
+			}
+			
 		});
 
 	};
