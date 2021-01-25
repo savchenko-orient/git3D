@@ -60,29 +60,56 @@ window.addEventListener('DOMContentLoaded', () => {
 		const popUp = document.querySelector('.popup'),
 			popUpBtn = document.querySelectorAll('.popup-btn'),
 			popUpClose = document.querySelector('.popup-close'),
-            popUpContent = document.querySelector('.popup-content');
+			popUpContent = document.querySelector('.popup-content');
+		
+		let opacityIn = 0,
+         	opacityOut = 1;
 
 		popUpBtn.forEach(elem => {
 			elem.addEventListener('click', () => {
 				if (document.documentElement.clientWidth > 768) {
-					let start = Date.now();
-					let timer = setInterval(function () {
-						let timePassed = Date.now() - start;
-						popUp.style.display = 'block';
-						popUpContent.style.left = timePassed / 2 + 'px';
-						if (timePassed >= 2000) {
-							clearInterval(timer);
-						}
-					}, 20);
-					
+					opacityIn = 0;
+                popUp.style.display = 'block';
+                let opacityInterval;
+                const opacityAnimate = function() {
+                    opacityInterval = requestAnimationFrame(opacityAnimate);
+                    opacityIn += 0.03;
+                    if (opacityIn < 1.01) {
+                        popUp.style.opacity = opacityIn;
+                    } else if (opacityIn >= 1) {
+                        cancelAnimationFrame(opacityInterval);
+                    }
+                };
+                opacityInterval = requestAnimationFrame(opacityAnimate); 
+				
 				} else {
 					popUp.style.display = 'block';
+					popUp.style.opacity = 1;
 				}
-			});
-		});
+                
+            });
+        });
 
 		popUpClose.addEventListener('click', () => {
-            popUp.style.display = 'none';
+			if (document.documentElement.clientWidth > 768){
+				let opacityInterval;
+            		opacityOut = 1;
+            	const opacityAnimate = function() {
+                opacityInterval = requestAnimationFrame(opacityAnimate);
+                opacityOut -= 0.03;
+                if (opacityOut > 0.01) {
+                    popUp.style.opacity = opacityOut;
+                } else {
+                    popUp.style.display = 'none';
+                    cancelAnimationFrame(opacityInterval);
+                }
+				};
+				
+				opacityInterval = requestAnimationFrame(opacityAnimate);
+			} else {
+				popUp.style.display = 'none';
+					popUp.style.opacity = 0;
+			}
         });
 	};
 
