@@ -334,4 +334,5 @@ window.addEventListener('DOMContentLoaded', () => {
 	};
 	calculator(100);
 
+	
 });
