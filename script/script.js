@@ -5,7 +5,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		timerMinutes = document.querySelector('#timer-minutes'),
 		timerSeconds = document.querySelector('#timer-seconds'),
 		timerDiv = document.querySelector('#timer'),
-		deadline = '16 january 2021',
+		deadline = '31 january 2021',
 		calcBlock = document.querySelector('.calc-block');
 
 	// Timer
@@ -343,25 +343,28 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		const statusMessage = document.createElement('div');
 		statusMessage.style.cssText = 'font-size: 18px';
-        statusMessage.style.color = '#fff';
+		statusMessage.style.color = '#fff';
 		
-		const postData = (body, outputData, errorData) => {
-			const request = new XMLHttpRequest();
-			request.addEventListener('readystatechange', () => {
+		const postData = (body) => {
+			return new Promise((resolve, reject) => {
+				const request = new XMLHttpRequest();
+				request.addEventListener('readystatechange', () => {
 				
-				if (request.readyState !== 4) {
-					return;
-				}
-				if (request.status === 200) {
-					outputData();
+					if (request.readyState !== 4) {
+						return;
+					}
+					if (request.status === 200) {
+						resolve();
 					
-				} else {
-					errorData(request.status);
-				}
+					} else {
+						reject(request.statusText);
+					}
+				});
+				request.open('POST', './server.php');
+				request.setRequestHeader('Content-Type', 'application/json');
+				request.send(JSON.stringify(body));
 			});
-			request.open('POST', './server.php');
-			request.setRequestHeader('Content-Type', 'application/json');
-			request.send(JSON.stringify(body));	
+			
 		};
 		
 		const setData = (event) => {
@@ -376,15 +379,15 @@ window.addEventListener('DOMContentLoaded', () => {
 				body[key] = val;
 			});
 
-			postData(body,
-				() => {
+			postData(body)
+				.then(() => {
 					statusMessage.textContent = successMessage;
 					event.target.reset();
-				},
-				(error) => {
-					statusMessage.textContent = errorMessage;
-					console.log(error);
-				});
+				})
+				
+				.catch(() => {
+                    statusMessage.textContent = errorMessage;
+                });
 		};
 
 		document.body.addEventListener('submit', (event) => {

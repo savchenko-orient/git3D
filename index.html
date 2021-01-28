@@ -14,6 +14,7 @@
 	<link rel="mask-icon" href="./images/favicon/safari-pinned-tab.svg" color="#5bbad5">
 	<meta name="msapplication-TileColor" content="#b91d47">
 	<meta name="theme-color" content="#ffffff">
+	<script src="script/script.js"></script>
 </head>
 
 <body>
@@ -411,7 +412,7 @@
 		</div>
 	</div>
 </div>
-<script src="script/script.js"></script>
+
 <script src="/plugins/validator/validator.js"></script>
 <script>
 	const validFormOne = new Validator({
@@ -419,7 +420,7 @@
                 pattern: {
 					user_name: /^[а-яА-ЯёЁ\s]+$/,
 					user_email: /^\w+@\w+\.\w{2,}$/,
-					user_phone: /[^+\D$]/
+					user_phone: /^\+380\d{3}\d{2}\d{2}\d{2}$/
                 },
                 method: {
                     'form1-name': [
@@ -441,7 +442,7 @@
                 pattern: {
 					user_name: /^[а-яА-ЯёЁ\s]+$/,
 					user_email: /^\w+@\w+\.\w{2,}$/,
-					user_phone: /[^+\D$]/,
+					user_phone: /^\+380\d{3}\d{2}\d{2}\d{2}$/,
 					user_message: /[^?!,.а-яА-ЯёЁ0-9\s$]/,
 					
                 },
@@ -468,7 +469,7 @@
                 selector: '#form3',
                 pattern: {
                     user_name: /^[а-яА-ЯёЁ\s]+$/,
-					user_phone: /[^+\D$]/,
+					user_phone: /^\+380\d{3}\d{2}\d{2}\d{2}$/,
 					user_email: /^\w+@\w+\.\w{2,}$/
                 },
                 method: {
