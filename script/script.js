@@ -340,9 +340,6 @@ window.addEventListener('DOMContentLoaded', () => {
 			loadMessage = 'Загрузка',
 			successMessage = 'Спасибо! Мы скоро с вами свяжемся.';
 		
-		const form1 = document.getElementById('form1'),
-			form2 = document.getElementById('form2'),
-            form3 = document.getElementById('form3');
 
 		const statusMessage = document.createElement('div');
 		statusMessage.style.cssText = 'font-size: 18px';
@@ -367,11 +364,12 @@ window.addEventListener('DOMContentLoaded', () => {
 			request.send(JSON.stringify(body));	
 		};
 		
-		const setData = (event, form) => {
+		const setData = (event) => {
 			event.preventDefault();
-			form.appendChild(statusMessage);
+			
+			event.target.appendChild(statusMessage);
 			statusMessage.textContent = loadMessage;
-			const formData = new FormData(form);
+			const formData = new FormData(event.target);
 			let body = {};
 
 			formData.forEach((val, key) => {
@@ -381,7 +379,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			postData(body,
 				() => {
 					statusMessage.textContent = successMessage;
-					form.reset();
+					event.target.reset();
 				},
 				(error) => {
 					statusMessage.textContent = errorMessage;
@@ -389,17 +387,10 @@ window.addEventListener('DOMContentLoaded', () => {
 				});
 		};
 
-		form1.addEventListener('submit', (event) => {
-			setData(event, form1);
+		document.body.addEventListener('submit', (event) => {
+			setData(event);
 		});
-
-		form2.addEventListener('submit', (event) => {
-			setData(event, form2);
-		});
-
-		form3.addEventListener('submit', (event) => {
-			setData(event, form3);
-		});
+		
 	};
 
 	sendForm();
