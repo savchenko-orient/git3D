@@ -419,7 +419,7 @@
                 pattern: {
 					user_name: /^[а-яА-ЯёЁ\s]+$/,
 					user_email: /^\w+@\w+\.\w{2,}$/,
-					user_phone: /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/
+					user_phone: /[^+\d$]/
                 },
                 method: {
                     'form1-name': [
@@ -441,8 +441,8 @@
                 pattern: {
 					user_name: /^[а-яА-ЯёЁ\s]+$/,
 					user_email: /^\w+@\w+\.\w{2,}$/,
-					user_phone: /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/,
-					user_message: /^[а-яА-ЯёЁ\s]+$/,
+					user_phone: /[^+\d$]/,
+					user_message: /[^?!,.а-яА-ЯёЁ0-9\s$]/,
 					
                 },
                 method: {
@@ -468,7 +468,7 @@
                 selector: '#form3',
                 pattern: {
                     user_name: /^[а-яА-ЯёЁ\s]+$/,
-					user_phone: /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/,
+					user_phone: /[^+\d$]/,
 					user_email: /^\w+@\w+\.\w{2,}$/
                 },
                 method: {
