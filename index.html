@@ -413,14 +413,14 @@
 	</div>
 </div>
 <script src="dist/dev-bundle.js"></script>
-<script src="/plugins/validator/validator.js"></script>
-<script>
+<!-- <script src="/plugins/validator/validator.js"></script> -->
+<!-- <script>
 	const validFormOne = new Validator({
                 selector: '#form1',
                 pattern: {
 					user_name: /^[а-яА-ЯёЁ\s]+$/,
 					user_email: /^\w+@\w+\.\w{2,}$/,
-					user_phone: /^\+380\d{3}\d{2}\d{2}\d{2}$/
+					user_phone: /^\+d{3}\d{3}\d{2}\d{2}\d{2}$/
                 },
                 method: {
                     'form1-name': [
@@ -492,6 +492,6 @@
         validFormOne.init();
         validFormTwo.init();
         validFormThree.init();
-</script>
+</script> -->
 </body>
 </html>

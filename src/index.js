@@ -9,6 +9,8 @@ import hover from './modules/hover';
 import numberValidation from './modules/numberValidation';
 import calculator from './modules/calculator';
 import sendForm from './modules/sendForm';
+import validation from './modules/validation';
+import checkValidation from './modules/checkValidation';
 
 	// Timer
 	countTimer('8, february, 2021');
@@ -36,3 +38,9 @@ import sendForm from './modules/sendForm';
 
 	// send-ajax-form
 	sendForm();
+	
+	// validation
+	validation();
+	
+	// checkValidation
+	checkValidation();
