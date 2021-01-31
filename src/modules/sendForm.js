@@ -37,12 +37,15 @@ const sendForm = () => {
                     throw new Error('status network not 200');
                 }
                 statusMessage.textContent = successMessage;
+                setTimeout(() => {
+                    statusMessage.style.display = 'none';
+                }, 4000);
                 event.target.reset();
             })
 
             .catch((error) => {
                 statusMessage.textContent = errorMessage;
-                console.error(error);
+                console.error(error); 
             });
     };
 
